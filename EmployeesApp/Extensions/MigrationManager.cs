@@ -13,19 +13,17 @@ namespace EmployeesApp.Extensions
         {
             using (var scope = webHost.Services.CreateScope())
             {
-                using (var appContext = scope.ServiceProvider.GetRequiredService<EmployeeContext>())
-                {
-                    try
-                    {
-                        appContext.Database.Migrate();
-                    }
-                    catch (Exception ex)
-                    {
-                        //Log errors or do anything you think it's needed
-                        throw;
-                    }
-                }
-            }
+				using var appContext = scope.ServiceProvider.GetRequiredService<EmployeeContext>();
+				try
+				{
+					appContext.Database.Migrate();
+				}
+				catch (Exception)
+				{
+					//Log errors or do anything you think it's needed
+					throw;
+				}
+			}
 
             return webHost;
         }

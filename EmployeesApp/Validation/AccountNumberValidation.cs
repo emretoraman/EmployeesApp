@@ -25,7 +25,7 @@ namespace EmployeesApp.Validation
 			if (middlePart.Length != middlePartLength)
 				return false;
 
-			var lastPart = accountNumber.Substring(secondDelimiter + 1);
+			var lastPart = accountNumber[(secondDelimiter + 1)..];
 			if (lastPart.Length != lastPartLength)
 				return false;
 
