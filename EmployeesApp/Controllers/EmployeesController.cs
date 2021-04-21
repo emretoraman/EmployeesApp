@@ -5,43 +5,43 @@ using EmployeesApp.Contracts;
 
 namespace EmployeesApp.Controllers
 {
-    public class EmployeesController : Controller
-    {
-        private readonly IEmployeeRepository _repo;
+	public class EmployeesController : Controller
+	{
+		private readonly IEmployeeRepository _repo;
 
-        public EmployeesController(IEmployeeRepository repo)
-        {
-            _repo = repo;
-        }
+		public EmployeesController(IEmployeeRepository repo)
+		{
+			_repo = repo;
+		}
 
-        public IActionResult Index()
-        {
-            var employees = _repo.GetAll();
-            return View(employees);
-        }
+		public IActionResult Index()
+		{
+			var employees = _repo.GetAll();
+			return View(employees);
+		}
 
-        public IActionResult Create()
-        {
-            return View();
-        }
+		public IActionResult Create()
+		{
+			return View();
+		}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Name,AccountNumber,Age")] Employee employee)
-        {
-            if(!ModelState.IsValid)
-            {
-                return View(employee);
-            }
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public IActionResult Create([Bind("Name,AccountNumber,Age")] Employee employee)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(employee);
+			}
 
-            _repo.CreateEmployee(employee);
-            return RedirectToAction(nameof(Index));
-        }
+			_repo.CreateEmployee(employee);
+			return RedirectToAction(nameof(Index));
+		}
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+	}
 }
