@@ -20,7 +20,7 @@ namespace EmployeesApp.Tests.Controller
 		}
 
 		[Fact]
-		public void Index_ActionExecutes_ReturnsViewForIndex()
+		public void Index_ActionExecutes_ReturnsView()
 		{
 			var result = _controller.Index();
 			Assert.IsType<ViewResult>(result);
@@ -40,7 +40,7 @@ namespace EmployeesApp.Tests.Controller
 		}
 
 		[Fact]
-		public void Create_ActionExecutes_ReturnsViewForCreate()
+		public void Create_ActionExecutes_ReturnsView()
 		{
 			var result = _controller.Create();
 			Assert.IsType<ViewResult>(result);
@@ -97,7 +97,7 @@ namespace EmployeesApp.Tests.Controller
 		}
 
 		[Fact]
-		public void Create_ActionExecuted_RedirectsToIndexAction()
+		public void Create_ActionExecutes_RedirectsToIndexAction()
 		{
 			var employee = new Employee
 			{
@@ -110,6 +110,13 @@ namespace EmployeesApp.Tests.Controller
 
 			var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
 			Assert.Equal("Index", redirectToActionResult.ActionName);
+		}
+
+		[Fact]
+		public void Error_ActionExecutes_ReturnsView()
+		{
+			var result = _controller.Error();
+			Assert.IsType<ViewResult>(result);
 		}
 	}
 }
